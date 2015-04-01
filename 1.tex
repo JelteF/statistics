@@ -5,12 +5,14 @@
 \usetikzlibrary{arrows}
 
 \usepackage[utf8]{inputenc}
-%\usepackage[a4paper]{geometry}
-\usepackage{fullpage}
+\usepackage[a4paper]{geometry}
+%\usepackage{fullpage}
 \usepackage{etoolbox}
 \usepackage{amsmath}
+\usepackage{latexsym}
 \usepackage{booktabs}
 \usepackage{minted}
+\usepackage{adjustbox}
 
 
 \makeatletter
@@ -30,21 +32,133 @@ Heuvel\thanks{Student nummer 10343725}}
     \item
         \begin{enumerate}
             \item
+                $U = \{1,2,3,4,5,6\}$, dit is niet een unieke mogelijkheid. Er
+                zijn ook andere uitkomstenruimten bedenkbaar.
+
             \item
+                \begin{align*}
+                    A &= \{1,2,3,4,5,6\}\\
+                    U&=A \times A
+                \end{align*}
+
             \item
+                $P((6,6)) = \frac16 \cdot \frac16 = \frac1{36}$
+
             \item
+                De uitkomsten set waarbij geldt dat het totaal van de ogen 9 is
+                is $B$.
+
+                \begin{align*}
+                    B &= \{(3,6), (6,3), (5,4), (4,5)\}\\
+                    P(B)&= 4\cdot\frac1{36}=\frac19
+                \end{align*}
+
             \item
-            \item
+                \begin{align*}
+                    C &= \{(a, b) | a \in A, b \in A, a+b = n\}\\
+                    P(C)&= |C| \cdot \frac1{36}
+                \end{align*}
+
+            \item De situaties waarbij een even aantal ogen wordt gegooid zijn
+                de situaties waarbij 2 maal een even aantal ogen is gegooid of 2
+                maal een oneven aantal ogen. Aangezien er evenveel even als
+                oneven ogen zijn kan je een van de twee berekenen en dat
+                vertweevoudigen. Er zijn 3 mogelijkheden om even te gooien bij
+                elke worp, dus er zijn 9 mogelijkheden om twee maal even te
+                gooien. $D$ is de set waarbij het totaal aantal gegooide ogen even
+                is.
+                $$
+                P(D) = 9 \cdot \frac1{36} \cdot 2 = \frac12
+                $$
+
         \end{enumerate}
 
     \item
+        \begin{align*}
+            P(1) &= P(U) - P(A\cup B) = 1 - 0.8 = 0.2\\
+            P(A\cup B) &= P(A) + P(B) + P(A \cap B)\\
+            P(3) &= P(A\cap B) \\
+                 &= P(A) + P(B) + P(A\cup B)\\
+                 &= 0.5 + 0.7 - 0.8 = 0.4\\
+            P(2) &= P(A) - P(3) = 0.5 - 0.4 = 0.1\\
+            P(4) &= P(B) - P(3) = 0.7 - 0.4 = 0.3
+        \end{align*}
 
     \item
         \begin{enumerate}
             \item
+                \begin{minipage}[t]{\linewidth}
+                    \adjustbox{valign=t}{
+                        \begin{tikzpicture}
+                            \tikzset{venn circle/.style={draw,circle,minimum
+                            width=6cm,fill=#1, fill opacity=0.2, text opacity=1}}
+                            \tikzset{universe/.style={draw,circle,minimum
+                            width=\linewidth}}
+
+                            \node [venn circle] (A) at (0,0) {$A$};
+                            \node [venn circle] (B) at (0:4cm) {$B$};
+                            \node [universe] (U) at (0:2cm) {};
+                            \node[below] at (barycentric cs:A=1/2,B=1/2 ) {$A \cap B$};
+                        \end{tikzpicture}
+                    }
+                \end{minipage}
+                Zoals te zien is in het venn diagram hierboven, wordt de kans op
+                $A\cap B$ dubbel geteld als je de kans van $A$ en $B$ bij elkaar
+                op telt. Dus om de kans op $A\cup B$ te krijgen moet je de kans
+                daarop een maal vanaf trekken.
+                Om algebraisch te bewijzen hebben we eerst de kansaxioma's
+                nodig.
+                \begin{align}
+                    P(A) &\ge 0\\
+                    P(U) &= 1 \\
+                    A,B \subset U, A\cap B =\emptyset : P(A\cup B) &= P(A)+P(B)
+                \end{align}
+
+                Dan nu het bewijs:
+                \begin{align}
+                    B' &= B\setminus A & (definitie)\\
+                    A \cap B' &= \emptyset & (4, verzamelingenleer)\\
+                    A \cup B &= A \cup B' & (4, verzamelingenleer)\\
+                    P(A\cup B) &= P(A) + P(B') & (3, 5, 6)\\
+                    B' \cap (A \cap B) &= \emptyset & (4, verzamelingenleer)\\
+                    B' \cup (A\cap B) &= B & (4, verzamelingenleer)\\
+                    P(B') + P(A \cap B) &= P(B) & (3, 8, 9)\\
+                    P(B') &= P(B) - P(A\cap B) & (10)\\
+                    P(A\cup B) &= P(A) + P(B) - P(A\cap B) & (7, 11)
+                \end{align}
+                \Box
+
             \item
+                \begin{align}
+                    \lnot A \cap A &= \emptyset & (verzamelingenleer)\\
+                    P(\lnot A \cup A) &= P(\lnot A) + P(A) & (3, 13)\\
+                    \lnot A &= U\setminus A & (verzamelingenleer)\\
+                    \lnot A \cup A &= U & (15, verzamelingenleer)\\
+                    P(U) &= P(\lnot A) + P(A) & (14, 16)\\
+                         &= 1 & (17, 2)\\
+                    P(\lnot A) &= 1 - P(A) & (17, 18)
+                \end{align}
+                \Box
+
             \item
+                \begin{align}
+                    \lnot B \cap B &= \emptyset & (verzamelingenleer)\\
+                    A\cap B &\subseteq B & (verzamelingenleer)\\
+                    A\cap \lnot B &\subseteq \lnot B & (verzamelingenleer)\\
+                    (A\cap B) \cap (A \cap \lnot B) &= \emptyset  &(20, 21, 22,
+                    verzamelingenleer)\\
+                    \lnot B &= U\setminus B & (verzamelingenleer)\\
+                    A\cap \lnot B &= A \cap (U\setminus B) & (24)\\
+                    A &\subseteq U & (verzamelingenleer)\\
+                    A\cap \lnot B &= A \setminus B & (26)\\
+                    (A\setminus B) \cap (A\cap B) &= A & (verzamelingenleer)\\
+                    (A\cap B) \cup (A \cap \lnot B) &=A & (27, 28)\\
+                    P(A\cap B) + P(A \cap \lnot B) &= P(A) & (3, 29, 23)
+                \end{align}
+                \Box
+
             \item
+
         \end{enumerate}
 
     \item
