@@ -11,7 +11,6 @@
 \usepackage{amsmath}
 \usepackage{latexsym}
 \usepackage{booktabs}
-\usepackage{minted}
 \usepackage{adjustbox}
 
 
@@ -126,7 +125,7 @@ Heuvel\thanks{Student nummer 10343725}}
                     P(B') &= P(B) - P(A\cap B) & (10)\\
                     P(A\cup B) &= P(A) + P(B) - P(A\cap B) & (7, 11)
                 \end{align}
-                \Box
+                $\Box$
 
             \item
                 \begin{align}
@@ -138,7 +137,7 @@ Heuvel\thanks{Student nummer 10343725}}
                          &= 1 & (17, 2)\\
                     P(\lnot A) &= 1 - P(A) & (17, 18)
                 \end{align}
-                \Box
+                $\Box$
 
             \item
                 \begin{align}
@@ -155,24 +154,56 @@ Heuvel\thanks{Student nummer 10343725}}
                     (A\cap B) \cup (A \cap \lnot B) &=A & (27, 28)\\
                     P(A\cap B) + P(A \cap \lnot B) &= P(A) & (3, 29, 23)
                 \end{align}
-                \Box
+                $\Box$
 
             \item
+                \begin{align}
+                    A \cap U &= A & (verzamelingenleer)\\
+                    \bigcup_{i=1}^n B_i &= U & (gegeven)\\
+                    A \cap \bigcup_{i=1}^n B_i &= A & (31, 32)\\
+                    \bigcup_{i=1}^n A \cap B_i &= A & (33, verzamelingenleer)\\
+                    A \cap B_i &\subseteq B_i & (verzamelingenleer)
+                \end{align}
+
+                Omdat alle $B_i$ disjunct zijn, en $A \cap B_i \subseteq B_i$,
+                zijn ook alle $A \cap B_i$ disjunct.
+
+                \begin{align}
+                    P(A) &= \sum_{i=1}^n P(A \cap B_i) & (34, 35)
+                \end{align}
+                $\Box$
 
         \end{enumerate}
 
     \item
+        \begin{align}
+            P(A|B) &= \frac{P(A \cap B)}{P(B)} & (conditionele kans)\\
+            P(B|A) &= \frac{P(B \cap A)}{P(A)} & (conditionele kans)\\
+            P(A \cap B) &= P(A) \cdot P(B|A) & (38)\\
+            P(A|B) &= \frac{P(A)}{P(B)} \cdot P(B|A) & (37, 39)
+        \end{align}
+        $\Box$
 
     \item
         \begin{enumerate}
             \item
+                De oppervlakte van $B$ wordt de nieuw $U$, door te normaliseren.
+
             \item
+                Als je het universum terugbrengt naar $B$, wil je daarna verder
+                kunnen rekenen met de axioma's. Stel $B'$ is de genormaliseerde
+                $B$, dan geldt $P(B')=1$. In de conditionele kans normaliseer je
+                alle kansberekeningen naar het oppervlak van $B$.
+
         \end{enumerate}
 
     \item
         \begin{enumerate}
             \item
+
             \item
+
+
         \end{enumerate}
 
     \item
