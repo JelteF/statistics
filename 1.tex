@@ -177,8 +177,8 @@ Heuvel\thanks{Student nummer 10343725}}
 
     \item
         \begin{align}
-            P(A|B) &= \frac{P(A \cap B)}{P(B)} & (conditionele kans)\\
-            P(B|A) &= \frac{P(B \cap A)}{P(A)} & (conditionele kans)\\
+            P(A|B) &= \frac{P(A \cap B)}{P(B)} & (conditionele\:kans)\\
+            P(B|A) &= \frac{P(B \cap A)}{P(A)} & (conditionele\:kans)\\
             P(A \cap B) &= P(A) \cdot P(B|A) & (38)\\
             P(A|B) &= \frac{P(A)}{P(B)} \cdot P(B|A) & (37, 39)
         \end{align}
@@ -204,7 +204,7 @@ Heuvel\thanks{Student nummer 10343725}}
 
                 \begin{align}
                     n &= 2 &\\
-                    P(A_1 A_2) &= P(A_1 | A_2) P(A_2) & (conditionele kans)
+                    P(A_1 A_2) &= P(A_1 | A_2) P(A_2) & (conditionele\:kans)
                 \end{align}
 
                 Inductie stap:
@@ -212,13 +212,13 @@ Heuvel\thanks{Student nummer 10343725}}
                 \begin{align}
                     P(A_1 A_2 \cdots A_n) &= P(A_n \cdots A_2 A_1) &
                     (verzamelingenleer) \\
-                    P(A_n \cdots A_2 A_1) &= P(A_n | A_1 A_2 \cdots A_{n-1}) &
-                    \\
-                    & \cdots P(A_2 | A_1) P(A_1) & \\
+                    P(A_n \cdots A_2 A_1) &= P(A_n | A_1 A_2 \cdots A_{n-1})
+                    \cdots P(A_2 | A_1) P(A_1) & (aanname) \\
                     P(A_{n+1} A_n \cdots A_2 A_1) &= P(A_{n+1} | A_1 A_2 \cdots
-                    A_n) & \\
-                         & P(A_n | A_1 A_2 \cdots A_{n-1}) & \\
-                    & \cdots P(A_2 | A_1) P(A_1) &
+                    A_n) P(A_n \cdots A_2 A_1) & (conditionele\:kans) \\
+                    &= P(A_{n+1} | A_1 A_2 \cdots A_n) P(A_n | A_1 A_2 \cdots
+                    A_{n-1}) & \notag \\
+                             & \cdots P(A_2 | A_1) P(A_1) & (44)
                 \end{align}
                 $\Box$
 
