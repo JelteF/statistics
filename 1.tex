@@ -237,11 +237,36 @@ Heuvel\thanks{Student nummer 10343725}}
         \end{enumerate}
 
     \item
-        Als A en B onafhankelijk zijn, zijn de combinaties van complementen van
-        A en B ook onafhankelijk. Als ze afhankelijk zijn, zijn de combinaties
-        van complementen ook afhankelijk.
+        \begin{enumerate}
+            \item
+                \begin{align}
+                    A \perp B \to P(A \cap B) &= P(A) P(B) & (onafhankelijk) \notag \\
+                                              &= P(A) (1 - P(\lnot B)) & (complement)
+                    \notag \\
+                                              &= P(A) -P(A)P(\lnot B) \\
+                    P(A \cap B) &= P(A) + P(B) - P(A \cup B) \notag \\
+                    P(A) - P(A) P(\lnot B) &= P(A) + P(B) - P(A \cup B) & (47) \\
+                    -P(A) P(\lnot B) &= P(B) - P(A \cup B) \notag \\
+                    P(A) P(\lnot B) &= P(A \cup B) - P(B) \notag \\
+                                    &= P(A) + P(B) - P(A \cap B) - P(B) \notag \\
+                                    &= P(A) - P(A \cap B) \notag \\
+                                    &= P(A \cap B) + P(A \cap \lnot B) - P(A \cap B)
+                    & (30) \notag \\
+                    &= P(A \cap \lnot B) \to A \perp \lnot B
+                \end{align}
+                $\Box$
 
-        Dat is heel logisch.
+            \item
+                Vervang A voor B en B voor A in bovenstaand bewijs, dan geldt
+                $P(\lnot A \cap B) = P(\lnot A) P(B) \to \lnot A \perp B$.
+
+            \item
+                Door een van de twee regels hierboven toe te passen, en het
+                vervolgens te herhalen met de volgende, geldt ook $P(\lnot A
+                \cap \lnot B) = P(\lnot A) P(\lnot B) \to \lnot A \perp \lnot
+                B$.
+
+        \end{enumerate}
 
     \item
         \newcommand{\kw}{\mathrm{w}}
