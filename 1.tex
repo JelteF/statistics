@@ -200,6 +200,27 @@ Heuvel\thanks{Student nummer 10343725}}
     \item
         \begin{enumerate}
             \item
+                Base case:
+
+                \begin{align}
+                    n &= 2 &\\
+                    P(A_1 A_2) &= P(A_1 | A_2) P(A_2) & (conditionele kans)
+                \end{align}
+
+                Inductie stap:
+
+                \begin{align}
+                    P(A_1 A_2 \cdots A_n) &= P(A_n \cdots A_2 A_1) &
+                    (verzamelingenleer) \\
+                    P(A_n \cdots A_2 A_1) &= P(A_n | A_1 A_2 \cdots A_{n-1}) &
+                    \\
+                    & \cdots P(A_2 | A_1) P(A_1) & \\
+                    P(A_{n+1} A_n \cdots A_2 A_1) &= P(A_{n+1} | A_1 A_2 \cdots
+                    A_n) & \\
+                         & P(A_n | A_1 A_2 \cdots A_{n-1}) & \\
+                    & \cdots P(A_2 | A_1) P(A_1) &
+                \end{align}
+                $\Box$
 
             \item
 
