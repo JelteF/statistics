@@ -223,7 +223,8 @@ Heuvel\thanks{Student nummer 10343725}}
                 $\Box$
 
             \item
-
+                Nee, bij (a) hebben we al een andere mogelijkheid gebruikt bij
+                het bewijs.
 
         \end{enumerate}
 
@@ -231,16 +232,43 @@ Heuvel\thanks{Student nummer 10343725}}
         \begin{enumerate}
             \item
             \item
+                Conditionele kans.
+
         \end{enumerate}
 
     \item
-        \begin{enumerate}
-            \item
-            \item
-            \item
-        \end{enumerate}
+        Als A en B onafhankelijk zijn, zijn de combinaties van complementen van
+        A en B ook onafhankelijk. Als ze afhankelijk zijn, zijn de combinaties
+        van complementen ook afhankelijk.
+
+        Dat is heel logisch.
 
     \item
+        \newcommand{\kw}{\mathrm{w}}
+        \newcommand{\kr}{\mathrm{r}}
+        \newcommand{\I}{\mathrm{I}}
+        \newcommand{\II}{\mathrm{II}}
+        \newcommand{\III}{\mathrm{III}}
+
+        \begin{align*}
+            P(K = \kw) &= P(K = \kw | V = \I) + P(K = \kw | V = \II) +
+            P(K = \kw | V = \III) \\
+            &= \frac5{18} + \frac29 + \frac16 = \frac23 \\
+            P(K = \kr) &= P(K = \kr | V = \I) + P(K = \kr | V = \II) +
+            P(K = \kr | V = \III) \\
+            &= \frac1{18} + \frac19 + \frac16 = \frac13 \\ \\
+            P(V = \I | K = \kw) &= \frac{P(V = \I)}{P(K = \kw)} \cdot
+            P(K = \kw | V = \I) \\
+            &= \frac13 \cdot \frac32 \cdot \frac5{18} = \frac{15}{36} \\
+            P(V = \II | K = \kw) &= \frac13 \cdot \frac32 \cdot \frac29
+            = \frac13 \\
+            P(V = \III | K = \kw) &= \frac13 \cdot \frac32 \cdot \frac16
+            = \frac14 \\
+            P(V = \I | K = \kr) &= \frac13 \cdot \frac31 \cdot \frac1{18} =
+            \frac1{18} \\
+            P(V = \II | K = \kr) &= \frac19 \\
+            P(V = \III | K = \kr) &= \frac16 \\
+        \end{align*}
 
 \end{enumerate}
 
