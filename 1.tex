@@ -2,7 +2,10 @@
 \usepackage{graphicx}
 
 \usepackage{tikz}
-\usetikzlibrary{arrows}
+\usepackage{tkz-graph}
+\usetikzlibrary{graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
+\usegdlibrary{trees}
+\usegdlibrary{layered}
 
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper]{geometry}
@@ -231,6 +234,33 @@ Heuvel\thanks{Student nummer 10343725}}
     \item
         \begin{enumerate}
             \item
+
+                \begin{minipage}[t]{\linewidth}
+                    \adjustbox{valign=t}{
+                        \newcommand{\third}{$\frac13$}
+                        \tikz [>={Stealth[bend]}, tree layout,
+                                sibling distance=15mm]
+                            \graph [level distance=20mm, nodes={circle,
+                            draw, inner sep=1.5pt, minimum size=0.75cm}] {
+                                root ->["\third"] {
+                                    I -> {
+                                        w1/w$\frac5{18}$[>{"$\frac56$"}],
+                                        r1/r$\frac1{18}$[>{"$\frac16$"}]
+                                    },
+                                    II -> {
+                                        w2/w$\frac29$[>{"$\frac23$"}],
+                                        r2/r$\frac19$[>{"$\frac13$"}]
+                                    },
+                                    III -> {
+                                        w3/w$\frac16$[>{"$\frac12$"}],
+                                        r3/r$\frac16$[>{"$\frac12$"}]
+                                    }
+                                }
+                            };
+                        }
+
+                    \end{minipage}
+
             \item
                 Conditionele kans.
 
@@ -294,6 +324,26 @@ Heuvel\thanks{Student nummer 10343725}}
             P(V = \II | K = \kr) &= \frac19 \\
             P(V = \III | K = \kr) &= \frac16 \\
         \end{align*}
+
+        \newcommand{\third}{$\frac13$}
+        \tikz [>={Stealth[bend]}, tree layout,
+                sibling distance=15mm]
+            \graph [level distance=20mm, nodes={circle,
+            draw, inner sep=1.5pt, minimum size=0.75cm}] {
+                root -> {
+                    w[>{"$\frac23$"}] -> {
+                        w1/I$\frac5{18}$[>{"$\frac{15}{36}$"}],
+                        w2/II$\frac29$[>{"$\frac13$"}],
+                        w3/III$\frac16$[>{"$\frac14$"}]
+                    },
+                    r[>{"\third"}] -> {
+                        r1/I$\frac1{18}$[>{"$\frac16$"}],
+                        r2/II$\frac19$[>{"$\frac13$"}],
+                        r3/III$\frac16$[>{"$\frac12$"}]
+                    }
+                }
+            };
+
 
 \end{enumerate}
 
