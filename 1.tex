@@ -1,9 +1,10 @@
 \documentclass{article}
+\usepackage[dutch]{babel}
 \usepackage{graphicx}
 
 \usepackage{tikz}
 \usepackage{tkz-graph}
-\usetikzlibrary{graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
+\usetikzlibrary{babel,graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
 \usegdlibrary{trees}
 \usegdlibrary{layered}
 
@@ -158,6 +159,23 @@ Heuvel\thanks{Student nummer 10343725}}
                     P(A\cap B) + P(A \cap \lnot B) &= P(A) & (3, 29, 23)
                 \end{align}
                 $\Box$
+
+                \begin{tikzpicture}
+                    \tikzset{venn circle/.style={draw,circle,minimum
+                    width=6cm,fill=#1, fill opacity=0.2, text opacity=1}}
+                    \tikzset{universe/.style={draw,circle,minimum
+                    width=\linewidth}}
+
+                    \node [venn circle] (A) at (0,0) {$A$};
+                    \node [venn circle] (B) at (0:4cm) {$B$};
+                    \node[below] at (barycentric cs:A=1/2,B=1/2 ) {$A \cap B$};
+                    \node [universe] (U) at (0:2cm) {};
+                    \node (NOTB) at (2,4) {$\lnot B$};
+                    \node (NOTBA) at (-1,0.5) {$A \cap\lnot B$};
+                \end{tikzpicture}
+                Zoals te zien is bestaat $A$ geheel uit de sets $A\cap\lnot B$
+                en $A\cap B$, en deze sets zijn ook disjunct. Dus de kansen
+                kunnen bij elkaar opgeteld worden.
 
             \item
                 \begin{align}
