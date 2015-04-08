@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usetikzlibrary{babel,graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
+\usegdlibrary{trees}
+\usegdlibrary{layered}
+
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper]{geometry}
+%\usepackage{fullpage}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+
+
+\makeatletter
+\patchcmd{\maketitle}{\@fnsymbol}{\@alph}{}{}  % Footnote numbers from symbols to small letters
+\makeatother
+
+\title{Huiswerk 2\\ \large{Statistisch Redeneren UvA-2015}}
+\author{Jelte Fennema\thanks{Student nummer 10183159} ~\& Bas van den
+Heuvel\thanks{Student nummer 10343725}}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+    \item We gaan er van uit dat er over een continu interval gesproken wordt.
+        \begin{enumerate}
+            \item
+                $$
+                F(x) =
+                \begin{dcases*}
+                    0 & als $x \leq 3$\\
+                    \frac{x-3}6 & als $3 < x \leq 9$\\
+                    1 & als $x > 9$\\
+                \end{dcases*}
+                $$
+
+            \item De kans hierop is 0
+
+            \item De kans hierop is ook 0
+
+        \end{enumerate}
+
+    \item
+        \begin{enumerate}
+                \newcommand{\kop}{\text{kop}}
+                \newcommand{\munt}{\text{munt}}
+            \item
+                $U = \{\kop, \munt\}$
+
+            \item
+                $$
+                P(k)= \left. n\choose k\right. p^k(1-p)^{n-k}
+                $$
+
+            \item Binomiaal
+
+            \item
+
+        \end{enumerate}
+
+\end{enumerate}
+
+
+\end{document}
