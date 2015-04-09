@@ -17,6 +17,7 @@
 \usepackage{latexsym}
 \usepackage{booktabs}
 \usepackage{adjustbox}
+\usepackage{minted}
 
 
 \makeatletter
@@ -66,6 +67,260 @@ Heuvel\thanks{Student nummer 10343725}}
             \item Binomiaal
 
             \item
+                \begin{minted}{python}
+from scipy.misc import comb
+
+
+def exp(p, n):
+    total = 0.0
+    for k in range(n+1):
+        total += comb(n, k, exact=False) * p**k * (1-p) ** (n-k)
+
+    return total
+
+
+def main():
+    for p in [0.3, 0.75, 0.8, 1.0, 0.0, 0.5]:
+        for n in range(1, 20):
+            print('Checking n=%d, p=%f' % (n, p))
+            print('Result: %f' % (exp(p, n)))
+
+if __name__ == '__main__':
+    main()
+                \end{minted}
+
+                Output:
+
+                \begin{minted}{text}
+Checking n=1, p=0.300000
+Result: 1.000000
+Checking n=2, p=0.300000
+Result: 1.000000
+Checking n=3, p=0.300000
+Result: 1.000000
+Checking n=4, p=0.300000
+Result: 1.000000
+Checking n=5, p=0.300000
+Result: 1.000000
+Checking n=6, p=0.300000
+Result: 1.000000
+Checking n=7, p=0.300000
+Result: 1.000000
+Checking n=8, p=0.300000
+Result: 1.000000
+Checking n=9, p=0.300000
+Result: 1.000000
+Checking n=10, p=0.300000
+Result: 1.000000
+Checking n=11, p=0.300000
+Result: 1.000000
+Checking n=12, p=0.300000
+Result: 1.000000
+Checking n=13, p=0.300000
+Result: 1.000000
+Checking n=14, p=0.300000
+Result: 1.000000
+Checking n=15, p=0.300000
+Result: 1.000000
+Checking n=16, p=0.300000
+Result: 1.000000
+Checking n=17, p=0.300000
+Result: 1.000000
+Checking n=18, p=0.300000
+Result: 1.000000
+Checking n=19, p=0.300000
+Result: 1.000000
+Checking n=1, p=0.750000
+Result: 1.000000
+Checking n=2, p=0.750000
+Result: 1.000000
+Checking n=3, p=0.750000
+Result: 1.000000
+Checking n=4, p=0.750000
+Result: 1.000000
+Checking n=5, p=0.750000
+Result: 1.000000
+Checking n=6, p=0.750000
+Result: 1.000000
+Checking n=7, p=0.750000
+Result: 1.000000
+Checking n=8, p=0.750000
+Result: 1.000000
+Checking n=9, p=0.750000
+Result: 1.000000
+Checking n=10, p=0.750000
+Result: 1.000000
+Checking n=11, p=0.750000
+Result: 1.000000
+Checking n=12, p=0.750000
+Result: 1.000000
+Checking n=13, p=0.750000
+Result: 1.000000
+Checking n=14, p=0.750000
+Result: 1.000000
+Checking n=15, p=0.750000
+Result: 1.000000
+Checking n=16, p=0.750000
+Result: 1.000000
+Checking n=17, p=0.750000
+Result: 1.000000
+Checking n=18, p=0.750000
+Result: 1.000000
+Checking n=19, p=0.750000
+Result: 1.000000
+Checking n=1, p=0.800000
+Result: 1.000000
+Checking n=2, p=0.800000
+Result: 1.000000
+Checking n=3, p=0.800000
+Result: 1.000000
+Checking n=4, p=0.800000
+Result: 1.000000
+Checking n=5, p=0.800000
+Result: 1.000000
+Checking n=6, p=0.800000
+Result: 1.000000
+Checking n=7, p=0.800000
+Result: 1.000000
+Checking n=8, p=0.800000
+Result: 1.000000
+Checking n=9, p=0.800000
+Result: 1.000000
+Checking n=10, p=0.800000
+Result: 1.000000
+Checking n=11, p=0.800000
+Result: 1.000000
+Checking n=12, p=0.800000
+Result: 1.000000
+Checking n=13, p=0.800000
+Result: 1.000000
+Checking n=14, p=0.800000
+Result: 1.000000
+Checking n=15, p=0.800000
+Result: 1.000000
+Checking n=16, p=0.800000
+Result: 1.000000
+Checking n=17, p=0.800000
+Result: 1.000000
+Checking n=18, p=0.800000
+Result: 1.000000
+Checking n=19, p=0.800000
+Result: 1.000000
+Checking n=1, p=1.000000
+Result: 1.000000
+Checking n=2, p=1.000000
+Result: 1.000000
+Checking n=3, p=1.000000
+Result: 1.000000
+Checking n=4, p=1.000000
+Result: 1.000000
+Checking n=5, p=1.000000
+Result: 1.000000
+Checking n=6, p=1.000000
+Result: 1.000000
+Checking n=7, p=1.000000
+Result: 1.000000
+Checking n=8, p=1.000000
+Result: 1.000000
+Checking n=9, p=1.000000
+Result: 1.000000
+Checking n=10, p=1.000000
+Result: 1.000000
+Checking n=11, p=1.000000
+Result: 1.000000
+Checking n=12, p=1.000000
+Result: 1.000000
+Checking n=13, p=1.000000
+Result: 1.000000
+Checking n=14, p=1.000000
+Result: 1.000000
+Checking n=15, p=1.000000
+Result: 1.000000
+Checking n=16, p=1.000000
+Result: 1.000000
+Checking n=17, p=1.000000
+Result: 1.000000
+Checking n=18, p=1.000000
+Result: 1.000000
+Checking n=19, p=1.000000
+Result: 1.000000
+Checking n=1, p=0.000000
+Result: 1.000000
+Checking n=2, p=0.000000
+Result: 1.000000
+Checking n=3, p=0.000000
+Result: 1.000000
+Checking n=4, p=0.000000
+Result: 1.000000
+Checking n=5, p=0.000000
+Result: 1.000000
+Checking n=6, p=0.000000
+Result: 1.000000
+Checking n=7, p=0.000000
+Result: 1.000000
+Checking n=8, p=0.000000
+Result: 1.000000
+Checking n=9, p=0.000000
+Result: 1.000000
+Checking n=10, p=0.000000
+Result: 1.000000
+Checking n=11, p=0.000000
+Result: 1.000000
+Checking n=12, p=0.000000
+Result: 1.000000
+Checking n=13, p=0.000000
+Result: 1.000000
+Checking n=14, p=0.000000
+Result: 1.000000
+Checking n=15, p=0.000000
+Result: 1.000000
+Checking n=16, p=0.000000
+Result: 1.000000
+Checking n=17, p=0.000000
+Result: 1.000000
+Checking n=18, p=0.000000
+Result: 1.000000
+Checking n=19, p=0.000000
+Result: 1.000000
+Checking n=1, p=0.500000
+Result: 1.000000
+Checking n=2, p=0.500000
+Result: 1.000000
+Checking n=3, p=0.500000
+Result: 1.000000
+Checking n=4, p=0.500000
+Result: 1.000000
+Checking n=5, p=0.500000
+Result: 1.000000
+Checking n=6, p=0.500000
+Result: 1.000000
+Checking n=7, p=0.500000
+Result: 1.000000
+Checking n=8, p=0.500000
+Result: 1.000000
+Checking n=9, p=0.500000
+Result: 1.000000
+Checking n=10, p=0.500000
+Result: 1.000000
+Checking n=11, p=0.500000
+Result: 1.000000
+Checking n=12, p=0.500000
+Result: 1.000000
+Checking n=13, p=0.500000
+Result: 1.000000
+Checking n=14, p=0.500000
+Result: 1.000000
+Checking n=15, p=0.500000
+Result: 1.000000
+Checking n=16, p=0.500000
+Result: 1.000000
+Checking n=17, p=0.500000
+Result: 1.000000
+Checking n=18, p=0.500000
+Result: 1.000000
+Checking n=19, p=0.500000
+Result: 1.000000
+            \end{minted}
 
         \end{enumerate}
 
