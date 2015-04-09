@@ -5,6 +5,8 @@
 5.pdf
 6.pdf
 
+venv
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
