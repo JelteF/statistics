@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns  # noqa
 from pprint import pprint  # noqa
 
-from math import pi as π
+from math import pi
 from math import exp, sqrt
 from collections import defaultdict
 from operator import itemgetter, attrgetter
@@ -61,25 +61,25 @@ def get_distributions(data):
     for name, group in data.groupby('Man/Vrouw'):
         d = {}
         dists[name] = d
-        for µ, σ, col_name in zip(group.mean(), group.std(),
-                                  group.columns.values[1:]):
-            d[col_name] = NormalDistribution(µ, σ, col_name)
+        for mu, sigma, col_name in zip(group.mean(), group.std(),
+                                       group.columns.values[1:]):
+            d[col_name] = NormalDistribution(mu, sigma, col_name)
     return dists
 
 
 class NormalDistribution:
     boundary_range = 5
 
-    def __init__(self, µ, σ, name=''):
-        self.µ = µ
-        self.σ = σ
-        self.lowerbound = µ - self.boundary_range * σ
-        self.upperbound = µ + self.boundary_range * σ
+    def __init__(self, mu, sigma, name=''):
+        self.mu = mu
+        self.sigma = sigma
+        self.lowerbound = mu - self.boundary_range * sigma
+        self.upperbound = mu + self.boundary_range * sigma
         self.name = name
 
     def pdf(self, x):
-        return 1 / (self.σ * sqrt(2 * π)) * \
-            exp(-((x - self.μ)**2) / (2 * self.σ**2))
+        return 1 / (self.sigma * sqrt(2 * pi)) * \
+            exp(-((x - self.mu)**2) / (2 * self.sigma**2))
 
 if __name__ == '__main__':
     main()

@@ -2,13 +2,18 @@
 \usepackage[dutch]{babel}
 \usepackage{graphicx}
 
-\usepackage{tikz}
-\usepackage{tkz-graph}
-\usetikzlibrary{babel,graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
-\usegdlibrary{trees}
-\usegdlibrary{layered}
+\usepackage{fontspec}
+\setmonofont{Inconsolata}
 
+%\usepackage{tikz}
+%\usepackage{tkz-graph}
+%\usetikzlibrary{babel,graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
+%\usegdlibrary{trees}
+%\usegdlibrary{layered}
+
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage[a4paper]{geometry}
 %\usepackage{fullpage}
 \usepackage{etoolbox}
@@ -35,6 +40,7 @@ Heuvel\thanks{Student nummer 10343725}}
 
 \begin{enumerate}
     \item We gaan er van uit dat er over een continu interval gesproken wordt.
+
         \begin{enumerate}
             \item
                 $$
@@ -67,264 +73,67 @@ Heuvel\thanks{Student nummer 10343725}}
             \item Binomiaal
 
             \item
-                \begin{minted}{python}
-from scipy.misc import comb
-
-
-def exp(p, n):
-    total = 0.0
-    for k in range(n+1):
-        total += comb(n, k, exact=False) * p**k * (1-p) ** (n-k)
-
-    return total
-
-
-def main():
-    for p in [0.3, 0.75, 0.8, 1.0, 0.0, 0.5]:
-        for n in range(1, 20):
-            print('Checking n=%d, p=%f' % (n, p))
-            print('Result: %f' % (exp(p, n)))
-
-if __name__ == '__main__':
-    main()
-                \end{minted}
+                \inputminted{python}{lab2_2_d.py}
 
                 Output:
 
-                \begin{minted}{text}
-Checking n=1, p=0.300000
-Result: 1.000000
-Checking n=2, p=0.300000
-Result: 1.000000
-Checking n=3, p=0.300000
-Result: 1.000000
-Checking n=4, p=0.300000
-Result: 1.000000
-Checking n=5, p=0.300000
-Result: 1.000000
-Checking n=6, p=0.300000
-Result: 1.000000
-Checking n=7, p=0.300000
-Result: 1.000000
-Checking n=8, p=0.300000
-Result: 1.000000
-Checking n=9, p=0.300000
-Result: 1.000000
-Checking n=10, p=0.300000
-Result: 1.000000
-Checking n=11, p=0.300000
-Result: 1.000000
-Checking n=12, p=0.300000
-Result: 1.000000
-Checking n=13, p=0.300000
-Result: 1.000000
-Checking n=14, p=0.300000
-Result: 1.000000
-Checking n=15, p=0.300000
-Result: 1.000000
-Checking n=16, p=0.300000
-Result: 1.000000
-Checking n=17, p=0.300000
-Result: 1.000000
-Checking n=18, p=0.300000
-Result: 1.000000
-Checking n=19, p=0.300000
-Result: 1.000000
-Checking n=1, p=0.750000
-Result: 1.000000
-Checking n=2, p=0.750000
-Result: 1.000000
-Checking n=3, p=0.750000
-Result: 1.000000
-Checking n=4, p=0.750000
-Result: 1.000000
-Checking n=5, p=0.750000
-Result: 1.000000
-Checking n=6, p=0.750000
-Result: 1.000000
-Checking n=7, p=0.750000
-Result: 1.000000
-Checking n=8, p=0.750000
-Result: 1.000000
-Checking n=9, p=0.750000
-Result: 1.000000
-Checking n=10, p=0.750000
-Result: 1.000000
-Checking n=11, p=0.750000
-Result: 1.000000
-Checking n=12, p=0.750000
-Result: 1.000000
-Checking n=13, p=0.750000
-Result: 1.000000
-Checking n=14, p=0.750000
-Result: 1.000000
-Checking n=15, p=0.750000
-Result: 1.000000
-Checking n=16, p=0.750000
-Result: 1.000000
-Checking n=17, p=0.750000
-Result: 1.000000
-Checking n=18, p=0.750000
-Result: 1.000000
-Checking n=19, p=0.750000
-Result: 1.000000
-Checking n=1, p=0.800000
-Result: 1.000000
-Checking n=2, p=0.800000
-Result: 1.000000
-Checking n=3, p=0.800000
-Result: 1.000000
-Checking n=4, p=0.800000
-Result: 1.000000
-Checking n=5, p=0.800000
-Result: 1.000000
-Checking n=6, p=0.800000
-Result: 1.000000
-Checking n=7, p=0.800000
-Result: 1.000000
-Checking n=8, p=0.800000
-Result: 1.000000
-Checking n=9, p=0.800000
-Result: 1.000000
-Checking n=10, p=0.800000
-Result: 1.000000
-Checking n=11, p=0.800000
-Result: 1.000000
-Checking n=12, p=0.800000
-Result: 1.000000
-Checking n=13, p=0.800000
-Result: 1.000000
-Checking n=14, p=0.800000
-Result: 1.000000
-Checking n=15, p=0.800000
-Result: 1.000000
-Checking n=16, p=0.800000
-Result: 1.000000
-Checking n=17, p=0.800000
-Result: 1.000000
-Checking n=18, p=0.800000
-Result: 1.000000
-Checking n=19, p=0.800000
-Result: 1.000000
-Checking n=1, p=1.000000
-Result: 1.000000
-Checking n=2, p=1.000000
-Result: 1.000000
-Checking n=3, p=1.000000
-Result: 1.000000
-Checking n=4, p=1.000000
-Result: 1.000000
-Checking n=5, p=1.000000
-Result: 1.000000
-Checking n=6, p=1.000000
-Result: 1.000000
-Checking n=7, p=1.000000
-Result: 1.000000
-Checking n=8, p=1.000000
-Result: 1.000000
-Checking n=9, p=1.000000
-Result: 1.000000
-Checking n=10, p=1.000000
-Result: 1.000000
-Checking n=11, p=1.000000
-Result: 1.000000
-Checking n=12, p=1.000000
-Result: 1.000000
-Checking n=13, p=1.000000
-Result: 1.000000
-Checking n=14, p=1.000000
-Result: 1.000000
-Checking n=15, p=1.000000
-Result: 1.000000
-Checking n=16, p=1.000000
-Result: 1.000000
-Checking n=17, p=1.000000
-Result: 1.000000
-Checking n=18, p=1.000000
-Result: 1.000000
-Checking n=19, p=1.000000
-Result: 1.000000
-Checking n=1, p=0.000000
-Result: 1.000000
-Checking n=2, p=0.000000
-Result: 1.000000
-Checking n=3, p=0.000000
-Result: 1.000000
-Checking n=4, p=0.000000
-Result: 1.000000
-Checking n=5, p=0.000000
-Result: 1.000000
-Checking n=6, p=0.000000
-Result: 1.000000
-Checking n=7, p=0.000000
-Result: 1.000000
-Checking n=8, p=0.000000
-Result: 1.000000
-Checking n=9, p=0.000000
-Result: 1.000000
-Checking n=10, p=0.000000
-Result: 1.000000
-Checking n=11, p=0.000000
-Result: 1.000000
-Checking n=12, p=0.000000
-Result: 1.000000
-Checking n=13, p=0.000000
-Result: 1.000000
-Checking n=14, p=0.000000
-Result: 1.000000
-Checking n=15, p=0.000000
-Result: 1.000000
-Checking n=16, p=0.000000
-Result: 1.000000
-Checking n=17, p=0.000000
-Result: 1.000000
-Checking n=18, p=0.000000
-Result: 1.000000
-Checking n=19, p=0.000000
-Result: 1.000000
-Checking n=1, p=0.500000
-Result: 1.000000
-Checking n=2, p=0.500000
-Result: 1.000000
-Checking n=3, p=0.500000
-Result: 1.000000
-Checking n=4, p=0.500000
-Result: 1.000000
-Checking n=5, p=0.500000
-Result: 1.000000
-Checking n=6, p=0.500000
-Result: 1.000000
-Checking n=7, p=0.500000
-Result: 1.000000
-Checking n=8, p=0.500000
-Result: 1.000000
-Checking n=9, p=0.500000
-Result: 1.000000
-Checking n=10, p=0.500000
-Result: 1.000000
-Checking n=11, p=0.500000
-Result: 1.000000
-Checking n=12, p=0.500000
-Result: 1.000000
-Checking n=13, p=0.500000
-Result: 1.000000
-Checking n=14, p=0.500000
-Result: 1.000000
-Checking n=15, p=0.500000
-Result: 1.000000
-Checking n=16, p=0.500000
-Result: 1.000000
-Checking n=17, p=0.500000
-Result: 1.000000
-Checking n=18, p=0.500000
-Result: 1.000000
-Checking n=19, p=0.500000
-Result: 1.000000
-            \end{minted}
+                \inputminted{text}{lab2_2_d.out}
+
+            tl;dr: De kans is overal 1.
 
         \end{enumerate}
 
+    \item
+        \inputminted{python}{lab2_3.py}
+        \input{plot2_3.tex}
+
 \end{enumerate}
 
+\newpage
+
+\section*{Naive Bayes Classificator}
+De classificatie of iemand een man of vrouw is, moet in dit model afhangen van
+de lengte, het gewicht en de schoenmaat van de geclassificeerde. Aangenomen is
+dat deze maten normaal verdeeld zijn. Om de kansdichtheidsfuncties te vinden van
+deze maten, hebben we het gemiddelde en de standaarddeviatie van de dataset
+berekend.
+
+De lengte, het gewicht en de schoenmaat zijn de drie gegeven \textit{features}
+van de data die geclassificeerd moet worden. Samen vormen zij vector $\vec x =
+(x_l,x_g,x_s)$. Gegeven deze features, willen we weten wat de kans is dat de
+data hoort bij een man of bij een vrouw ($C_m$ of $C_v$). De kans die het
+grootste is wordt als waarheid beschouwd.
+
+Volgens de stelling van Bayes geldt:
+
+$$ p(C_k|\vec x) = \frac{p(C_k)p(\vec x|C_k)}{p(\vec x)}$$
+
+Dit willen we oplossen voor $C_k = C_m$ en $C_k = C_v$.
+
+Omdat voor beide berekeningen geldt dat $p(\vec x)$ hetzelfde is, kunnen we deze
+buiten beschouwing laten, dus hoeven we alleen $p(C_k)p(\vec x|C_k)$ op te
+lossen.
+
+Volgens de chain rule geldt:
+
+$$p(x_l, x_g, x_s|C_k) = p(x_l|C_k)p(x_g|C_k,x_l)p(x_s|C_k,x_l,x_g)$$
+
+Ervan uitgaande dat de features onafhankelijk zijn, kan worden gesteld dat:
+
+$$p(x_l, x_g, x_s|C_k) = p(x_l|C_k)p(x_g|C_k)p(x_s|C_k)$$
+
+De kansen $p(x_i|C_k)$ zijn te berekenen met de kansdichtheidsfuncties die we
+eerder hebben opgesteld.
+
+Wat we uiteindelijk dus moeten bereken is:
+
+$$P(C_m)p(x_l|C_m)p(x_g|C_m)p(x_s|C_m) > P(C_v)p(x_l|C_v)p(x_g|C_v)p(x_s|C_v)$$
+
+Wanneer dat waar is, wordt het te classificeren als man geclassificeerd. Als dit
+niet waar is, wordt het geclassificeerd als vrouw.
+
+De code:
+
+\inputminted{python}{naive_noutf.py}
 
 \end{document}
