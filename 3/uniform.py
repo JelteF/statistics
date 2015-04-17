@@ -20,8 +20,8 @@ def main():
                 take_samples(ibm_gen), take_samples(ibm_gen))
 
 
-def take_samples(gen):
-    return np.array(list(islice(gen, N)))
+def take_samples(gen, n=N):
+    return np.array(list(islice(gen, n)))
 
 
 def dist_to_tex(filename, caption, x, y):
