@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+
+\usepackage{fontspec}
+\setmonofont{Inconsolata}
+
+%\usepackage{tikz}
+%\usepackage{tkz-graph}
+%\usetikzlibrary{babel,graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
+%\usegdlibrary{trees}
+%\usegdlibrary{layered}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+%\usepackage{fullpage}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{minted}
+
+
+\makeatletter
+\patchcmd{\maketitle}{\@fnsymbol}{\@alph}{}{}  % Footnote numbers from symbols to small letters
+\makeatother
+
+\title{Huiswerk 3\\ \large{Statistisch Redeneren UvA-2015}}
+\author{Jelte Fennema\thanks{Student nummer 10183159} ~\& Bas van den
+Heuvel\thanks{Student nummer 10343725}}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+    \item
+        \begin{align}
+            p_X(x) &= \sum_{y \in S_Y} p_{XY}(x, y) \\
+            E(X+Y) &= \sum_{x \in S_X} \sum_{y \in S_Y} (x+y)p_{XY}(x,y) \notag \\
+                   &= \sum_{x \in S_X} \sum_{y \in S_Y} \left(xp_{XY}(x, y)
+            +yp_{XY}(x, y) \right) \notag \\
+                   &= \sum_{x \in S_X} \left(xp_X(x) + \sum_{y \in S_Y}
+            yp_{XY}(x,y)\right)
+            & (1) \notag \\
+                   &= \sum_{x \in S_X} xp_X(x) + \sum_{y \in S_Y} yp_Y(y) & (1)
+            \notag \\
+                   &= E(X) + E(Y) \notag \\
+                   & \Box \notag
+        \end{align}
+\end{enumerate}
+
+\end{document}
