@@ -23,6 +23,7 @@
 \usepackage{booktabs}
 \usepackage{adjustbox}
 \usepackage{minted}
+\usepackage{enumerate}
 
 
 \makeatletter
@@ -53,6 +54,24 @@ Heuvel\thanks{Student nummer 10343725}}
                    &= E(X) + E(Y) \notag \\
                    & \Box \notag
         \end{align}
+
+    \item
+        \begin{enumerate}[1.]
+            \item ..
+
+            \item ..
+
+            \item ..
+
+            \item
+                Numpy gebruikt de Mersenne Twister P(seudo)RNG. Het voordeel hiervan is
+                dat alle bits van de getallen die deze PRNG produceert evenveel
+                willekeurig zijn. Dit is bij de LCG niet het geval. Bovendien is de
+                periode van Mersenne Twister enorm ($2^{19937}-1$), waardoor getallen
+                zich niet snel zullen herhalen.
+
+        \end{enumerate}
+
 \end{enumerate}
 
 \end{document}
