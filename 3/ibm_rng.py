@@ -1,4 +1,4 @@
-def ibm_rng(x1, a, c, m):
+def ibm_rng(x1, a=65539, c=0, m=2**31):
     x = x1
     while True:
         x = (a * x + c) % m
