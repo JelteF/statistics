@@ -2,9 +2,6 @@
 \usepackage[dutch]{babel}
 \usepackage{graphicx}
 
-\usepackage{fontspec}
-\setmonofont{Inconsolata}
-
 %\usepackage{tikz}
 %\usepackage{tkz-graph}
 %\usetikzlibrary{babel,graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
@@ -57,11 +54,34 @@ Heuvel\thanks{Student nummer 10343725}}
 
     \item
         \begin{enumerate}[1.]
-            \item ..
+            \item Zie Figuur 1
+                \input{np_random.tex}
 
-            \item ..
 
-            \item ..
+
+            \item  Zie Figuur 2
+                \input{ibm_random.tex}
+
+            \item
+                \newcommand{\modd}{\bmod 2^{31}}
+                \begin{align*}
+                    x_{k+2} &= ax_{k+1}  \modd \\
+                            &= a(ax_k\modd)  \modd\\
+                            &= a(ax_k)  \modd\\
+                            &= a^2x_k  \modd\\
+                            &= (2^{16} + 3)^2x_k  \modd\\
+                            &= (2^{16} + 3)(2^{16} + 3)x_k  \modd\\
+                            &= (2^{16} + 3)(2^{16} + 3)x_k  \modd\\
+                            &= 2^{32}x_k + 6\times2^{16}x_k + 9x_k  \modd\\
+                            &= 2\times2^{31}x_k + 6\times2^{16}x_k + 9x_k  \modd\\
+                            &= 6\times2^{16}x_k + 9x_k  \modd\\
+                            &= 6\times2^{16}x_k + 9x_k  \modd\\
+                            &= 6\times2^{16}x_k + 18x_k - 9xk  \modd\\
+                            &= 6(2^{16}x_k + 3x_k) - 9xk  \modd\\
+                            &= 6((2^{16} + 3)x_k) - 9xk  \modd\\
+                            &= 6((2^{16} + 3)x_k \modd) - 9xk  \modd\\
+                            &= 6x_{k+1} - 9xk  \modd\\
+                \end{align*}
 
             \item
                 Numpy gebruikt de Mersenne Twister P(seudo)RNG. Het voordeel
