@@ -3,7 +3,7 @@ from numpy import std
 from math import sqrt
 
 
-TEST_CASE_N = 10000
+TEST_CASE_N = 100
 TEST_DATA_N = 50
 C = 2.009
 ALPHA = 0.05
@@ -42,9 +42,13 @@ def test_case(data, mu):
 
     t = (x_avg - mu) / (s / sqrt(TEST_DATA_N))
 
-    # print('c: %f, T: %f' % (C, t))
+    hit = t >= -C and t <= C
 
-    return t >= -C and t <= C
+    print('$%f \leq %f \leq %f$ & %s \\\\' % (-C, t, C,
+                                              'binnen interval' if hit
+                                              else 'buiten interval'))
+
+    return hit
 
 
 if __name__ == '__main__':

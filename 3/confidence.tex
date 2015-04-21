@@ -1,0 +1,193 @@
+\documentclass{article}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+
+%\usepackage{tikz}
+%\usepackage{tkz-graph}
+%\usetikzlibrary{babel,graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
+%\usegdlibrary{trees}
+%\usegdlibrary{layered}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+%\usepackage{fullpage}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{minted}
+\usepackage{enumerate}
+\usepackage{longtable}
+\usepackage{tabu}
+
+
+\makeatletter
+\patchcmd{\maketitle}{\@fnsymbol}{\@alph}{}{}  % Footnote numbers from symbols to small letters
+\makeatother
+
+\title{Huiswerk 3 - Betrouwbaarheids intervallen\\ \large{Statistisch Redeneren UvA-2015}}
+\author{Jelte Fennema\thanks{Student nummer 10183159} ~\& Bas van den
+Heuvel\thanks{Student nummer 10343725}}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introductie}
+Om statistische berekeningen te doen voor een grote populatie, kan je een subset
+van de populatie nemen. Door het betrouwbaarheidsinterval van de subset te
+berekenen, kan je achterhalen hoe betrouwbaar de subset is, ten opzichte van de
+gehele populatie.
+
+Voor dit experiment hebben we gebruik gemaakt van een lijst van wachttijden uit
+de simulatie van een wachtrij en gebruikten we een 95\%
+betrouwbaarheidsinterval. Hiervan nemen we honderd maal vijftig tijden.  Door te
+kijken of de $\mu$ van de gehele lijst wachttijden binnen het
+betrouwbaarheidsinterval van de steekproef, berekend met het gemiddelde en de
+variantie van die steekproef, kunnen we berekenen in hoeveel procent van de
+gevallen de $\mu$ in dat interval valt. Dit aantal zal moeten neerkomen op
+ongeveer 95\%.
+
+\section{Berekening}
+
+De $\sigma$ van de steekproef is niet bekend. Om deze reden maken we gebruik van
+de T-score, die berekend wordt met de schatte $\hat\sigma = s$. De berekening
+van de T-score gaat als volgt:
+
+$$ T = \frac{\bar{X} - \mu}{s / \sqrt{n}} $$
+
+Om nu te kijken of $\mu$ in het betrouwbaarheidsinterval van deze steekproef
+ligt, kijken we of $T$ in het interval $[-c,+c]$ ligt. Deze $c$ is te berekenen
+aan de hand van de inverse cumulatieve kansdichtheidsfunctie:
+
+$$ c = F^{-1}_{T(n-1)} (1-\alpha) $$
+
+Echter, omdat deze berekening behoorlijk complex is, halen we de waarde van $c$
+behorende bij ons experiment, uit een tabel. De waarde die hoort bij 50 graden
+vrijheid, en $\alpha=0.05$ is $c=2.009$.
+
+Als geldt $-c \leq T \leq +c$, dan ligt $\mu$ in het betrouwbaarheidsinterval
+van deze steekproef.
+
+\subsection{Interpretatie}
+We hebben de berekeningen als volgt geïmplementeerd in Python:
+
+\inputminted{python}{confidence.py}
+
+\section{Resultaat}
+We verwachtten dat bij 95\% van de steekproeven de $\mu$ in het
+betrouwbaarheidsinterval zou liggen. Echter komen we bij honderd, en zelfs bij
+tien duizend steekproeven veelal net onder de 95\% uit, namelijk 93\% à 94\%.
+
+De resultaten:
+
+\begin{longtabu}{cc}
+    \textbf{Interval} & \textbf{Resultaat} \\
+    $-2.009000 \leq -0.113487 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.530304 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.632615 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.082038 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.085115 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.451230 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -2.069597 \leq 2.009000$ & buiten interval \\
+    $-2.009000 \leq 0.879860 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.423410 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -2.203033 \leq 2.009000$ & buiten interval \\
+    $-2.009000 \leq 0.612098 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.337275 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.797638 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.118311 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.558692 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.184446 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.385817 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -2.003884 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.485160 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.465638 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.071324 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.961449 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.492761 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.272551 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.015238 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.359494 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.538020 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.272615 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.800503 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.786511 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -2.582686 \leq 2.009000$ & buiten interval \\
+    $-2.009000 \leq 0.238192 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.865253 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.119988 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.739344 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -2.243309 \leq 2.009000$ & buiten interval \\
+    $-2.009000 \leq -1.489082 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.399868 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.131696 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.191957 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.204587 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.659885 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.285501 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.554070 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.126905 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.300471 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.394491 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.744827 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.042134 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -2.144119 \leq 2.009000$ & buiten interval \\
+    $-2.009000 \leq -2.203385 \leq 2.009000$ & buiten interval \\
+    $-2.009000 \leq -0.083688 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.096420 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.933373 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.332347 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.089088 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.112245 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.041381 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.444033 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.533916 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.134078 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.461557 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.502269 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.573995 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.321335 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.713543 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.114213 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.395741 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.853057 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.443208 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.337213 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -1.502006 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.422561 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.499501 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.421004 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.236156 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.375433 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.326522 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.020070 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.846449 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.845859 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.942634 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.091911 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.031515 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 2.402742 \leq 2.009000$ & buiten interval \\
+    $-2.009000 \leq -1.540262 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.170462 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.199668 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.454551 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.323361 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.176220 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.261075 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.907192 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.698046 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.707626 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 1.610373 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.118786 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.098173 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq -0.034697 \leq 2.009000$ & binnen interval \\
+    $-2.009000 \leq 0.426884 \leq 2.009000$ & binnen interval
+\end{longtabu}
+
+\end{document}
