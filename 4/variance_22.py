@@ -27,6 +27,34 @@ def main():
     print('S % difference:')
     print(((S / S_est) - 1) * 100)
 
+    mu_est, S_est = estimate_more(mu, S)
+    print('mean estimation:', mu_est)
+    print('S estimation:')
+    print(S_est)
+
+    print()
+
+    print('mean % difference:', (np.diagonal(mu / mu_est) - 1) * 100)
+    print('S % difference:')
+    print(((S / S_est) - 1) * 100)
+
+
+def estimate_more(mu, S):
+    d, U = np.linalg.eig(S)
+    L = np.diagflat(d)
+    A = np.dot(U, np.sqrt(L))
+    X = np.random.randn(4, N)
+    Y = np.dot(A, X) + np.tile(mu, N)
+    Y = Y.T
+    n = 2
+    Y = Y.reshape(N/n, n, 4).mean(1).T
+
+    Ybar = np.mean(Y, 1)
+    Yzm = Y - np.tile(Ybar[:, None], N/n)
+    Sest = np.dot(Yzm, Yzm.T) / (N-1)
+
+    return Ybar, Sest
+
 
 def estimate(mu, S):
     d, U = np.linalg.eig(S)
