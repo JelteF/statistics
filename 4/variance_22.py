@@ -27,6 +27,8 @@ def main():
     print('S % difference:')
     print(((S / S_est) - 1) * 100)
 
+    print()
+
     mu_est, S_est = estimate_more(mu, S)
     print('mean estimation:', mu_est)
     print('S estimation:')

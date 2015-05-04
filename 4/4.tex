@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+
+%\usepackage{tikz}
+%\usepackage{tkz-graph}
+%\usetikzlibrary{babel,graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
+%\usegdlibrary{trees}
+%\usegdlibrary{layered}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+%\usepackage{fullpage}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{minted}
+\usepackage{enumerate}
+
+
+\makeatletter
+\patchcmd{\maketitle}{\@fnsymbol}{\@alph}{}{}  % Footnote numbers from symbols to small letters
+\makeatother
+
+\title{Huiswerk 4\\ \large{Statistisch Redeneren UvA-2015}}
+\author{Jelte Fennema\thanks{Student nummer 10183159} ~\& Bas van den
+Heuvel\thanks{Student nummer 10343725}}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Multivariate}
+
+\subsection{Exercise 19}
+
+\begin{align*}
+    E(Z) &= E\left(\begin{matrix}X_1 + X_2 \\ X_1 - X_2\end{matrix}\right) \\
+         &= \left(\begin{matrix}E(X_1 + X_2) \\ E(X_1 - X_2)\end{matrix}\right) \\
+         &= \left(\begin{matrix}E(X_1) + E(X_2) \\ E(X_1) - E(X_2)\end{matrix}\right) \\
+         &= \left(\begin{matrix}1 + -1 \\ 1 - -1\end{matrix}\right) \\
+         &= \left(\begin{matrix}0 \\ 2\end{matrix}\right) \\
+    \Sigma(Z) &= E\left((Z - E(Z))(Z - E(Z))^T\right) \\
+              &= E\left(\left(\left(\begin{matrix}Z_1 \\ Z_2\end{matrix}\right)
+              - \left(\begin{matrix}0 \\
+      2\end{matrix}\right)\right)\left(\left(\begin{matrix}Z_1 \\
+  Z_2\end{matrix}\right) - \left(\begin{matrix}2 \\
+  0\end{matrix}\right)\right)^T\right) \\
+  &= E\left(\left(\begin{matrix}Z_1 \\ Z_2 -
+  2\end{matrix}\right)\left(\begin{matrix}Z_1 \\ Z_2 -
+  2\end{matrix}\right)^T\right) \\
+  &= E\left(\left(\begin{matrix}Z_1 \\ Z_2 -
+  2\end{matrix}\right)\left(\begin{matrix}Z_1 & Z_2 -
+  2\end{matrix}\right)\right) \\
+  &= E\left(\left(\begin{matrix}Z_1^2 & Z_1 (Z_2 - 2) \\ Z_1 (Z_2 - 2) & (Z_2 -
+  2)^2\end{matrix}\right)\right) \\
+  &= \left(\begin{matrix}0 & 0 \\ 0 & 0\end{matrix}\right)
+\end{align*}
+
+We can not conclude that $Z_1$ and $Z_2$ are independent. Though there is no
+correlation between them, they aren't necessarily indepent.
+
+\subsection{Exercise 20}
+
+\begin{align*}
+    \Sigma(Z) &= \left(\begin{matrix}\sigma(Z_1, Z_1) & \sigma(Z_1, Z_2) \\
+\sigma(Z_2, Z_1) & \sigma(Z_2, Z_2)\end{matrix}\right) \\
+    \sigma(Z_1, Z_1) &= \sigma(X_1 + X_2, X_1 - X_2) \\
+                     &= \sigma(X_1, X_1) + \sigma(X_1, X_2) + \sigma(X_2, X_1) +
+    \sigma(X_2, X_2) \\
+    &= 1 + 0 + 0 + c \\
+    &= 1 + c \\
+    \sigma(Z_1, Z_2) &= \sigma(Z_2, Z_1) = \sigma(X_1 + X_2, X_1 - X_2) \\
+                     &= \sigma(X_1, X_1) - \sigma(X_1, X_2) + \sigma(X_2, X_1)
+    - \sigma(X_2, X_2) \\
+    &= 1 - 0 + 0 - c \\
+    &= 1 - c \\
+    \sigma(Z_2, Z_2) &= \sigma(X_1 - X_2, X_1 - X_2) \\
+                     &= \sigma(X_1, X_1) - \sigma(X_1, X_2) - \sigma(X_2, X_1) +
+    \sigma(X_2, X_2) \\
+    &= 1 - 0 - 0 + c \\
+    &= 1 + c \\
+\Sigma(Z) &= \left(\begin{matrix}1 + c & 1 - c \\ 1 - c & 1 +
+c\end{matrix}\right) \\
+\sigma(Z_1, Z_2) &= 1 - c = 0 \\
+c &= 1
+\end{align*}
+
+\subsection{Exercise 21}
+
+\inputminted{python}{variance_21.py}
+
+\input{variance_21.tex}
+
+\newpage
+
+\subsection{Exercise 22}
+
+\inputminted{python}{variance_22.py}
+
+Output:
+
+\inputminted{text}{variance_22.txt}
+
+In theory, all these estimated means will lie close to each other. As a result,
+the calculated covariance matrix is very small, and differs greatly from the
+orignally estimated covariance matrix.
+
+\section{PCA}
+
+\subsection{Exercise 5.1}
+
+\begin{align*}
+    S &= \frac1{n-1} \Sigma^n_{i=1} (\vec x_i - \vec m)(\vec x_i - \vec m)^T \\
+      &= \frac1{n-1} \Sigma^n_{i=1} (\vec x_i - \vec m)(\vec x_i^T - \vec m^T)
+    \\
+      &= \frac1{n-1} \Sigma^n_{i=1} \left(\vec x_i \vec x_i^T - \vec x_i \vec
+m^T - \vec m \vec x_i^T + \vec m \vec m ^T\right) \\
+    \vec m &= \frac1n \Sigma^n_{i=1} \vec x_i \\
+    \Sigma^n_{i=1} \vec x_i &= n \vec m \\
+    \Sigma^n_{i=1} \left(\vec x_i \vec x_i^T - \vec x_i \vec m^T - \vec m \vec
+    x_i^T + \vec m \vec m^T\right) &= \Sigma^n_{i=1} \vec x_i \vec x_i^T -
+        \Sigma^n_{i=1} \vec x_i \vec m^T - \Sigma^n_{i=1} \vec m \vec
+    x_i^T + \Sigma^n_{i=1} \vec m \vec m^T \\
+    &= \Sigma^n_{i=1} \vec x_i \vec x_i^T - \left(\Sigma^n_{i=1} \vec x_i\right)
+    \vec m^T - \vec m \left(\Sigma^n_{i=1} \vec x_i\right)^T + n \vec m \vec m^T
+    \\
+    &= \Sigma^n_{i=1} \vec x_i \vec x_i^T - n \vec m \vec m^T - n \vec m \vec
+    m^T + n \vec m \vec m^T \\
+    S &= \frac{\Sigma^n_{i=1} \vec x_i \vec x_i^T - n \vec m \vec m^T}{n-1} \\
+    \Box
+\end{align*}
+
+\end{document}
