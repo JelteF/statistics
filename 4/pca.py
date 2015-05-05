@@ -3,6 +3,7 @@ from scipy.misc import imread
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import os.path
+from pylatex import Subsection, Plt, Figure
 
 
 n = 256
@@ -70,10 +71,23 @@ def main():
         U = np.load('U.npy')
         mean_vec = np.load('mean_vec.npy')
 
-    plt.bar(range(6), d[:6])
-    plt.show()
+    plt.bar(range(6), abs(d[:6]))
+    # plt.show()
 
-    for k in range(1, 625, 10):
+    with open('scree.tex', 'w') as f:
+        plot = Plt(position='htbp')
+        plot.add_plot(plt)
+        plot.add_caption('Scree diagram')
+
+        plot.dump(f)
+
+    sec = Subsection('Gereconstrueerde foto\'s')
+    with sec.create(Figure(position='htbp')) as fig:
+        fig.add_image('trui.png')
+        fig.add_caption('Origineel')
+
+    for k in [0, 1, 3, 5, 7, 10, 20, 30, 50, 80, 120, 170,
+              220, 300, 370, 450, 520, 590, 625]:
         reconstructed = np.zeros((n, n))
 
         for i in range(0, 232, 25):
@@ -82,8 +96,15 @@ def main():
                 reconstructed[i:i+25, j:j+25] = subimg.reshape((25, 25))
 
         plt.imshow(reconstructed, cmap=cm.Greys_r)
-        plt.show()
+        plt.title('k = ' + str(k))
+        # plt.show()
 
+        with sec.create(Plt(position='htbp')) as plot:
+            plot.add_plot(plt)
+            plot.add_caption('k = ' + str(k))
+
+    with open('images.tex', 'w') as f:
+        sec.dump(f)
 
 if __name__ == '__main__':
     main()

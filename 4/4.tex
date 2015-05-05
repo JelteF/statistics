@@ -137,4 +137,45 @@ m^T - \vec m \vec x_i^T + \vec m \vec m ^T\right) \\
     \Box
 \end{align*}
 
+
+\section{Excercise 5.3: Eigenstructure}
+Door gebruik van PCA zou het mogelijk moeten zijn om een detail van een foto op
+te slaan met minder data terwijl de geconstrueerde detail nog redelijk veel op
+een oude foto lijkt. We gaan hier onderzoeken hoe goed deze manier werkt.
+
+Onze implementatie werkt als volgt. Allereerst maken we van een 2D detail van
+$25\times25$ pixels een vector van 625 elementen, door alle rijen achter elkaar te
+plaatsen. Van deze vectors gaan we de geschatte covariantie matrix
+berekenen. Aangezien er $232 \times 232 = 53824$ verschillende details zitten in
+onze foto van $256\times 256$. gebruiken we formule zoals in 5.1 beschreven om
+alle data maar 1 keer in memory te hoeven laden.
+
+Van deze covariantie matrix maken we de eigenwaarde decompositie vinden.
+Die sorteren we daarna op grootte van de eigenvalues om de belangrijkste
+richtingen van variantie te vinden.
+Zoals te zien is in het scree diagmram is er 1 eigenvector die erg veel bepaald
+en daarna bepalen de volgende relatief weinig informatie over de detail.
+
+\input{scree.tex}
+
+Met deze gesorteerde eigenwaarde decompositie kunnen we dan de een benadering
+van een datail genereren door de alleen de eerste $k$ eigenwaarden te gebruiken
+bij het reconstrueeren.
+
+Onze resultaten bij verschillende $k$'s zijn hieronder te zien. We hebben
+hier $10 \times 10$ details aan elkaar geplakt zodat het resultaat goed te
+vergelijken is met de originele foto. Er is goed te zien dat met $k = 1$ al een
+goed globaal beeld van de foto te zien is, al lijkt elk detail dan nog op een
+egaal vlak. Dit wordt snel beter en globale vormen zijn al redelijk te zien bij
+$k = 5$. Dan komt natuurlijk de moeilijke vraag, bij welke $k$ is het detail
+goed genoeg? Dat hangt natuurlijk van de definitie van goed genoeg af. Bij $k =
+20$ is bijvoorbeeld al behoorlijk te zien dat het een foto van een persoon is en
+de vormen op de trui zijn ook behoorlijk goed te onderschijden. Echter zijn de
+wat kleinere details binnen de details niet goed te zien. Deze zijn pas echt
+goed te zien bij $k = 220$, vooral de ogen en de kleine vierkantjes aan de
+linkerkant op de sjaal komen dan pas goed te voorschijn.
+
+
+\input{images.tex}
+
 \end{document}
