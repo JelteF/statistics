@@ -1,7 +1,8 @@
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+from pyplot import Plot
 
 
 def main():
@@ -25,12 +26,17 @@ def main():
     Y = np.dot(A, X) + np.tile(mu, n)
     print(Y)
     df = pd.DataFrame(Y.T, columns=['x1', 'x2', 'x3', 'x4'])
-    sns.pairplot(df)
-    plt.show()
+    plots = sns.pairplot(df)
+    # plt.show()
     # plt.plot(X[0], X[1], '+b')
     # plt.plot(Y[0], Y[1], '+b')
     # plt.show()
 
+    with open('variance_21.tex', 'w') as f:
+        plt = Plot(position='htbp')
+        plt.add_plot(plots)
+        plt.add_caption('Scatter plots')
+        plt.dump(f)
 
 
 if __name__ == '__main__':
