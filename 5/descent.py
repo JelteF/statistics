@@ -1,6 +1,5 @@
 import numpy as np
 import numpy.random as rd
-from numpy.linalg import norm
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 
