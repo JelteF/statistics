@@ -1,6 +1,7 @@
 import numpy as np
 import numpy.random as rd
 import matplotlib.pyplot as plt
+from pylatex import Plt
 from scipy.optimize import minimize
 
 th1 = 2
@@ -36,7 +37,12 @@ def Jac(th):
 res = minimize(J, (10, .6), jac=Jac, method='CG')
 print(res)
 eth1, eth2 = res.x
-plt.plot(x, y, 'xb')
-plt.plot(x, eth1 * np.sin(eth2 * x), 'b')
-plt.plot(x, th1 * np.sin(th2 * x), 'g')
-plt.show('figures/linregression.png')
+dataplt = plt.plot(x, y, 'xb')
+estiplt = plt.plot(x, eth1 * np.sin(eth2 * x), 'b')
+realplt = plt.plot(x, th1 * np.sin(th2 * x), 'g')
+
+with open('descent.tex', 'w') as f:
+    plot = Plt(position='H')
+    plot.add_plot(plt)
+    plot.add_caption('Non-linear Regression')
+    plot.dump(f)

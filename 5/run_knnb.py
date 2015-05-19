@@ -32,7 +32,7 @@ def main():
 
     print('Acuracy for every k\'s from 1 to 9')
     for k, a in zip(test_k, mean_accuracies):
-        print(k, a, sep=': ')
+        print(k, '%f%%' % (a * 100), sep=': ')
 
 
 def do_knnb(k, seed=None, plot=True, print_=True):

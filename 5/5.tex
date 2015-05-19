@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+
+%\usepackage{tikz}
+%\usepackage{tkz-graph}
+%\usetikzlibrary{babel,graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
+%\usegdlibrary{trees}
+%\usegdlibrary{layered}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+%\usepackage{fullpage}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{minted}
+\usepackage{enumerate}
+\usepackage{morefloats}
+\usepackage{float}
+
+
+\makeatletter
+\patchcmd{\maketitle}{\@fnsymbol}{\@alph}{}{}  % Footnote numbers from symbols to small letters
+\makeatother
+
+\title{Huiswerk 5\\ \large{Statistisch Redeneren UvA-2015}}
+\author{Jelte Fennema\thanks{Student nummer 10183159} ~\& Bas van den
+Heuvel\thanks{Student nummer 10343725}}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Non-linear Regression}
+Generating noisy data is similar to the example: $y = \theta_1 sin(\theta_2 x) +
+0.3 randn()$.
+
+The function $J$ is as described in the exercise:
+
+\begin{align*}
+    J(\vec \theta) = J(\theta_1, \theta_2) &= \sum_{i=1}^N (y_i - m(\vec x_i; \vec
+    \theta))^2 \\
+    &= \sum_{i=1}^N (y_i - \theta_1 sin(\theta_2 x))^2
+\end{align*}
+
+The gradient of $J$ ($Jac$) is defined as follows:
+
+$$ Jac(\vec \theta) = \left(\begin{matrix}\sum 2 sin(\theta_2 \vec x_i) (-y +
+\theta_1 sin(\theta_2 \vec x_i)) \\ \sum 2 \theta_1 \vec x_i cos(\theta_2 \vec
+x_i) (-y + \theta_1 sin(\theta_2 \vec x_i)) \end{matrix} \right) $$
+
+Using NumPy's minimize function, the resulting plot is made (blue is estimated
+function, green is actual function):
+
+\input{descent.tex}
+
+This works very well with $\vec \theta_{initial} = \left(\begin{matrix}10 \\
+0.6\end{matrix}\right)$. However, with different starting values, this fails
+more significantly, probably because there are many local minima.
+
+\section{k-NNb classifier}
+
+Instead of only picking the nearest neighbor, the $k$ nearest neigbors are
+picked, using NumPy's argsort function. Using these neighbors, the mode of these
+results is picked, using SciPy's statistic mode function. This picks the value
+that occurs most in the data. The result of this function is used to classify
+the datapoint. These are the accuricies:
+
+\inputminted{text}{knnb.txt}
+
+\section{Minimum Error Classification I}
+The graphs for $p_{XC}(x, C=k)$ are simple: $p_{XC}(x, C=K) =
+p_{X|C}(x|C=k)P(C=k)$, thus the formula for the graph is: $pdf_{X|C}(x|C=k)
+P(C=k)$, with $\mu_k$ and $\sigma_k$.
+
+$P(C=k|x) = \frac{p_{X|C}(x|C=k)P(C=k)}{p_X(x)}$, but $p_X(x)$ is unknown.
+Because the divisor $p_X(x)$ is equal for both formulae, we can add their values
+together and divide $p_{X|C}(x|C=k)P(C=k)$ by that value for every $x$, which
+gives the same result:
+
+\input{minerr_1.tex}
+
+\section{Minimum Error Classification II}
+Every class gets a 4-dimensional normal distribution, which is create by
+calculating the mean vector and covariance matrices for all classes. Using this
+data, a SciPy normal distribution is created using the multivariate\_normal
+function, which can take a covariance matrix. In the classification process,
+using the formulae described in the previous exercise, the chances for every
+class are calculated, and the best case wins. The accuracy, learning 400 times,
+on random subsets of the data, is about $97.3\%$.
+
+\end{document}

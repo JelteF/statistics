@@ -3,6 +3,7 @@ from scipy import stats
 import matplotlib.pyplot as pl
 import seaborn as sns  # noqa
 from itertools import count
+from pylatex import Plt
 
 
 P = [0.3, 0.7]
@@ -40,7 +41,11 @@ def main():
     pl.plot(X, P_cx, 'b--')
     pl.plot(X, 1 - P_cx, 'r--')
 
-    pl.show()
+    with open('minerr_1.tex', 'w') as f:
+        plt = Plt(position='H')
+        plt.add_plot(pl)
+        plt.add_caption('Minimum Error Classification I')
+        plt.dump(f)
 
 
 if __name__ == '__main__':
