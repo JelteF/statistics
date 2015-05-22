@@ -1,6 +1,6 @@
 from sklearn import preprocessing
 from sklearn import svm
-from sklearn import gridsearch
+from sklearn import grid_search
 import numpy as np
 import numpy.random as rd
 
@@ -54,9 +54,19 @@ def main(seed=None):
 
     # Create SVM.
     clf = svm.SVC()
+    print(clf.get_params())
+
+    # Brute-force parameters
+    params = [{'C': [1, 10, 100, 1000], 'kernel': ['linear']},
+              {'C': [1, 10, 100, 1000], 'gamma': [0.001, 0.0001],
+               'kernel': ['rbf']}, ]
+    clf_p = grid_search.GridSearchCV(clf, params)
+    print(clf)
+    print(clf_p)
 
     # Fit data.
     clf.fit(X_learn, y_learn)
+    clf_p.fit(X_learn, y_learn)
 
     # Test set.
     X_test = X_scaled[T, :]
@@ -64,12 +74,22 @@ def main(seed=None):
 
     # Test all data.
     pred_clss = clf.predict(X_test)
+    pred_clss_p = clf_p.predict(X_test)
 
     # Create confusion matrix.
     cm = np.zeros((len(colors), len(colors)))
-    for pred_cls, cls in zip(pred_clss, y_test):
+    cm_p = np.zeros((len(colors), len(colors)))
+    good = 0
+    good_p = 0
+    for pred_cls, pred_cls_p, cls in zip(pred_clss, pred_clss_p, y_test):
+        good += pred_cls == cls
+        good_p += pred_cls_p == cls
         cm[cls, pred_cls] += 1
+        cm_p[cls, pred_cls_p] += 1
 
+    print('%d/%d (%f%%) good' % (good, len(y_test), good / len(y_test) * 100))
+    print('%d/%d (%f%%) good (p)' % (good_p, len(y_test),
+                                     good_p / len(y_test) * 100))
     print(cm)
 
 
@@ -83,4 +103,5 @@ def cnvt(s):
 
 
 if __name__ == '__main__':
+    # main(seed=1)
     main()
