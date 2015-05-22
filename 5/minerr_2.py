@@ -21,10 +21,10 @@ DATA = loadtxt('data/iris.data', delimiter=',', dtype=float,
 
 def main():
     seed = rd.randint(10000)
-    n = 400
+    n = 1
     accuracies = np.zeros((n, ))
     for i in range(n):
-        accuracies[i] = do_minerr(seed, plot=False, print_=False)
+        accuracies[i] = do_minerr(seed, plot=False, print_=True)
         seed += 1
 
     mean_accuracy = np.mean(accuracies)

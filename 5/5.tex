@@ -52,9 +52,9 @@ The function $J$ is as described in the exercise:
 
 The gradient of $J$ ($Jac$) is defined as follows:
 
-$$ Jac(\vec \theta) = \left(\begin{matrix}\sum 2 sin(\theta_2 \vec x_i) (-y +
-\theta_1 sin(\theta_2 \vec x_i)) \\ \sum 2 \theta_1 \vec x_i cos(\theta_2 \vec
-x_i) (-y + \theta_1 sin(\theta_2 \vec x_i)) \end{matrix} \right) $$
+$$ Jac(\vec \theta) = \left(\begin{matrix}\sum 2 sin(\theta_2 x_i) (-y +
+\theta_1 sin(\theta_2 x_i)) \\ \sum 2 \theta_1 x_i cos(\theta_2
+x_i) (-y + \theta_1 sin(\theta_2 x_i)) \end{matrix} \right) $$
 
 Using NumPy's minimize function, the resulting plot is made (blue is estimated
 function, green is actual function):
@@ -75,6 +75,8 @@ the datapoint. These are the accuricies:
 
 \inputminted{text}{knnb.txt}
 
+It is clear that every amount of $k > 1$ performs better than $k=1$.
+
 \section{Minimum Error Classification I}
 The graphs for $p_{XC}(x, C=k)$ are simple: $p_{XC}(x, C=K) =
 p_{X|C}(x|C=k)P(C=k)$, thus the formula for the graph is: $pdf_{X|C}(x|C=k)
@@ -88,12 +90,14 @@ gives the same result:
 \input{minerr_1.tex}
 
 \section{Minimum Error Classification II}
-Every class gets a 4-dimensional normal distribution, which is create by
+Every class gets a 4-dimensional normal distribution, which is created by
 calculating the mean vector and covariance matrices for all classes. Using this
 data, a SciPy normal distribution is created using the multivariate\_normal
 function, which can take a covariance matrix. In the classification process,
 using the formulae described in the previous exercise, the chances for every
 class are calculated, and the best case wins. The accuracy, learning 400 times,
-on random subsets of the data, is about $97.3\%$.
+on random subsets of the data, is about $97.3\%$. A confusion matrix of one try:
+
+\inputminted{text}{minerr_2.txt}
 
 \end{document}
