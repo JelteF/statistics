@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+
+%\usepackage{tikz}
+%\usepackage{tkz-graph}
+%\usetikzlibrary{babel,graphdrawing,graphs,arrows.meta,shapes.misc,chains,positioning,shapes,quotes,automata,bending}
+%\usegdlibrary{trees}
+%\usegdlibrary{layered}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+%\usepackage{fullpage}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{minted}
+\usepackage{enumerate}
+\usepackage{morefloats}
+\usepackage{float}
+
+
+\makeatletter
+\patchcmd{\maketitle}{\@fnsymbol}{\@alph}{}{}  % Footnote numbers from symbols to small letters
+\makeatother
+
+\title{Huiswerk 6\\ \large{Statistisch Redeneren UvA-2015}}
+\author{Jelte Fennema\thanks{Student nummer 10183159} ~\& Bas van den
+Heuvel\thanks{Student nummer 10343725}}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Support Vector Machines}
+Support Vector Machines (SVMs) zijn niet-probabilistische binaire lineaire
+classificators. De SVMs kunnen ook niet-lineaire problemen oplossen, en het is
+mogelijk ze toe te passen voor problemen met meer dan twee classes.
+
+De lineaire SVM probeert een hyperplane te vinden die de datapunten van
+verschillende classes scheidt met een zo groot mogelijke marge. Als zo'n
+hyperplane niet gevonden kan worden, kan gebruik gemaakt worden van een ``soft
+margin'', die misclassificaties toe laat. Hierbij bepaalt constante $C$ de
+trade-off tussen een grote marge en een kleine mate van misclassificatie.
+
+Om niet-lineaire problemen op te lossen, transformeer je de originele datapunten
+d.m.v. de kernel trick naar een hogere dimensie, waar een lineaire scheiding met
+maximale marge gevonden kan worden. Deze hyperplane is lineair in een hogere
+dimensie, waar deze in de originele ruimte niet lineair lijkt. De kernel die
+hierbij gebruikt wordt is niet-lineair.
+
+Om met SVMs meerdere classes dan twee te onderscheiden, maak je gebruik van
+meerdere SVMs, waarbij de output met elkaar wordt vergeleken. De beste output
+bepaalt dan de class waar het datapunt in wordt geclassificeerd. Hierbij zijn
+twee opties mogelijk: \textit{one-versus-one} en \textit{one-versus-all}. Bij de
+eerste vergelijk je omstebeurt de SVMs van de verschillende classes met elkaar
+(in paren van twee), de class die het vaakste wint wordt gekozen als uitkomst.
+Bij de tweede wordt per class een SVM gemaakt die de data scheidt tussen
+\textit{deze class} en \textit{andere class}. De SVM met de hoogste confidence
+bepaalt bij deze strategie de uitkomst.
+
+\section{Kleurtjes}
+
+\subsection{Data}
+
+
+\end{document}
