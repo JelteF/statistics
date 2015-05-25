@@ -89,5 +89,16 @@ geraden classes worden vergeleken met de daadwerkelijke classes en uiteengezet
 in een confusion matrix en de totale accuracy wordt ook bepaald.
 
 
+\subsection{Resultaten}
+De SVM met geschatte parameters zijn aanzienlijk beter. De resultaten liggen
+rond de 77\% nauwkeurigheid. Wel klaagde \textit{sklearn} dat de kleinste class
+maar één datapunt heeft. Bij nagaan van de confusion matrices en de dataset
+zelf, kwamen we erachter dat het hierbij ging om het enkele datapunt met de
+kleur ``roze''. Na uitgebreid testen van de SVM zónder dit datapunt, komen we
+tot de conclusie dat dit geen invloed heeft op het eindresultaat, aangezien ook
+hierbij de resultaten rond de 77\% nauwkeurigheid liggen. Zonder de grijze
+datapunten, waarvan er maar drie voorkomen, komen we uit op 78\% nauwkeurigheid.
+Zonder de zwarte datapunten (vier stuks), verhoogt de nauwkeurigheid naar 80\%.
+Het aantal leervoorbeelden per class lijkt dus wel degelijk belangrijk te zijn.
 
 \end{document}
