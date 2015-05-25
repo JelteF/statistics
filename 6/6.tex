@@ -19,10 +19,12 @@
 \usepackage{latexsym}
 \usepackage{booktabs}
 \usepackage{adjustbox}
-\usepackage{minted}
+%\usepackage{minted}
 \usepackage{enumerate}
 \usepackage{morefloats}
 \usepackage{float}
+\usepackage{lmodern}
+%\usepackage[stretch=10]{microtype}
 
 
 \makeatletter
@@ -68,6 +70,24 @@ bepaalt bij deze strategie de uitkomst.
 \section{Kleurtjes}
 
 \subsection{Data}
+De data die gebruikt is bestaat uit een lijst met spectogrammen, met daarbij als
+label de kleur die bij dat spectogram hoort.
+
+\subsection{Procedure}
+Allereerst wordt de data opgesplitst in 2 delen, de leer set en de test set.
+Dan wordt doormiddel van een gridsearch de beste set parameters gezocht voor
+gebruik door de svm met dataset. Dit wordt gedaan door binnen de leerset de
+paramaters te kiezen die het beste resultaat geven. Dit wordt gedaan door
+k-crossvalidation met $k=3$. Dit betekent dat de dataset (de leer data) wordt
+opgesplitst in 3 delen en voor elk van die delen gekeken wordt met welke
+parameters het beste resultaat ontstaant waneer er getraind wordt op de
+overgebleven 2 delen.
+
+Als laatste worden de classes van de test geraden aan de hand van de clasifier
+die geleerd is met de leerdata en de daarbij passende beste parameters. Deze
+geraden classes worden vergeleken met de daadwerkelijke classes en uiteengezet
+in een confusion matrix en de totale accuracy wordt ook bepaald.
+
 
 
 \end{document}
