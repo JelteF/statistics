@@ -1,11 +1,10 @@
 from sklearn import preprocessing
 from sklearn import svm
 from sklearn import grid_search
+from sklearn import cross_validation
 from itertools import combinations_with_replacement
 from functools import partial
-import time
 import numpy as np
-import numpy.random as rd
 
 
 def main(seed=None, with_combinations=False):
@@ -38,44 +37,26 @@ def main(seed=None, with_combinations=False):
             X = np.append(X, np.array([d]), axis=0)
             y = np.append(y, ind)
 
-    if with_combinations:
-        n = X.shape[0]
-        for i, j in combinations_with_replacement(range(61), 2):
-            a = X[:, i] * X[:, j]
-            X = np.hstack((X, a.reshape((n, 1))))
-
     # Scale data.
     X_scaled = preprocessing.scale(X)
-    # print(X_scaled)
 
     # Choose learn and test data.
-    if seed is not None:
-        rd.seed(seed)
-    ind = np.arange(X_scaled.shape[0])  # indices into the dataset
-    ind = rd.permutation(ind)  # random permutation
-    L = ind[0:90]  # learning set indices
-    T = ind[90:]  # test set indices
-
-    # Learning set.
-    X_learn = X_scaled[L, :]
-    y_learn = y[L]
+    X_learn, X_test, y_learn, y_test = \
+        cross_validation.train_test_split(X_scaled, y, test_size=0.5,
+                                          random_state=seed)
 
     # Create SVM.
     clf = svm.SVC()
 
     # Brute-force parameters
-    params = [{'C': [1, 10, 100, 1000], 'kernel': ['linear']},
-              {'C': [1, 10, 100, 1000], 'gamma': [0.001, 0.0001],
-               'kernel': ['rbf']}, ]
+    C_range = np.logspace(-2, 10, 13)
+    gamma_range = np.logspace(-9, 3, 13)
+    params = {'C': C_range, 'gamma': gamma_range}
     clf_p = grid_search.GridSearchCV(clf, params)
 
     # Fit data.
     clf.fit(X_learn, y_learn)
     clf_p.fit(X_learn, y_learn)
-
-    # Test set.
-    X_test = X_scaled[T, :]
-    y_test = y[T]
 
     # Test all data.
     pred_clss = clf.predict(X_test)
@@ -96,6 +77,8 @@ def main(seed=None, with_combinations=False):
     print(cm)
     print('%d/%d (%f%%) good (p)' % (good_p, len(y_test),
                                      good_p / len(y_test) * 100))
+
+    print(clf_p.best_estimator_, clf_p.best_score_, clf_p.best_params_)
     print(cm_p)
 
 
@@ -109,7 +92,7 @@ def cnvt(s):
 
 
 if __name__ == '__main__':
-    p_main = partial(main, seed=int(time.time()))
-    print(p_main)
-    p_main()
-    p_main(with_combinations=True)
+    seed = 1
+    print(seed)
+    main(seed=seed)
+    main()
